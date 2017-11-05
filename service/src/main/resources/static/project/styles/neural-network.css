@@ -1,0 +1,47 @@
+.create_network {
+    width: 300px;
+    border-radius: 3px;
+    margin: 10px;
+    background-color: #c6f3a9;
+    padding: 10px;
+    display: inline-block;
+    float: left;
+}
+
+.train_network {
+    width: 300px;
+    border-radius: 3px;
+    margin: 10px;
+    background-color: #d8e9f3;
+    padding: 10px;
+    display: inline-block;
+    float: left;
+}
+
+
+.validate_network {
+    width: 500px;
+    border-radius: 3px;
+    margin: 10px;
+    background-color: #e5d1f3;
+    padding: 10px;
+    float: left;
+}
+
+.validation-result {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: white;
+}
+
+.float-fix {
+    visibility: hidden;
+    display: block;
+    content: '.';
+    height: 0;
+    clear: both;
+}
+
+.forms-container {
+    margin-top: 60px;
+}

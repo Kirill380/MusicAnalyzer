@@ -1,0 +1,111 @@
+.music-card {
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+    height: 100px;
+}
+
+.music-card::after {
+    visibility: hidden;
+    display: block;
+    content: '.';
+    height: 0;
+    clear: both;
+}
+
+.music-card__component {
+    display: inline-block;
+    height: 100px;
+    padding: 10px;
+}
+
+.music-card__image {
+    float: left;
+    width: 10%;
+    cursor: pointer;
+}
+
+.image {
+    height: 80px;
+    width: 80px;
+}
+
+.music-card__music-info {
+    float: left;
+    width: 23%;
+}
+
+.music-info__author {
+    color: #4a4a4a;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.25;
+}
+
+.music-info__title {
+    color: #363636;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.125;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.music-card__waveform {
+    float: left;
+    width: 45%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.waveform {
+    max-width: 100%;
+    height: 60px;
+}
+
+.music-card__music-duration {
+    float: left;
+    width: 10%;
+}
+
+.music-card__music-tempo {
+    float: left;
+    width: 10%;
+}
+
+.music-feature__title {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.music-feature__value {
+    color: #363636;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.125;
+    text-align: center;
+}
+
+.music-card__delete-button {
+    display: inline-block;
+    float: left;
+    width: 2%;
+    position: relative;
+}
+
+.delete-button {
+    top: 5px;
+    right: 10px;
+    opacity: 0.5;
+    position: absolute;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    opacity: 1;
+}
+

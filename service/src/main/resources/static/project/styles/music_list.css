@@ -1,0 +1,8 @@
+.music-list {
+    padding-top: 50px;
+}
+
+.music-list__item {
+    margin-bottom: 30px;
+    width: 1000px;
+}

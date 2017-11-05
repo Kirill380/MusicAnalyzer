@@ -1,0 +1,23 @@
+server:
+  port: 8087
+
+spring:
+  http:
+    multipart:
+      max-file-size: 900MB
+      max-request-size: 900MB
+  jackson:
+    default-property-inclusion: NON_NULL
+    serialization:
+      write-dates-as-timestamps: false
+  datasource:
+    url: ${mysql.url:jdbc:mysql://localhost/plant_care}
+    username: root
+    password: ${mysql.root-pwd:send08}
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
