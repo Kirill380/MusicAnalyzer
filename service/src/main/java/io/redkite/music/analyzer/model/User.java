@@ -1,7 +1,7 @@
 package io.redkite.music.analyzer.model;
 
 
-import io.redkite.music.analyzer.common.DabConstants;
+import io.redkite.music.analyzer.common.DbConstants;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,16 +30,16 @@ public class User {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(name = DabConstants.UserTable.EMAIL, unique = true, nullable = false)
+  @Column(name = DbConstants.UserTable.EMAIL, unique = true, nullable = false)
   private String email;
 
-  @Column(name = DabConstants.UserTable.FIRST_NAME)
+  @Column(name = DbConstants.UserTable.FIRST_NAME)
   private String firstName;
 
-  @Column(name = DabConstants.UserTable.LAST_NAME)
+  @Column(name = DbConstants.UserTable.LAST_NAME)
   private String lastName;
 
-  @Column(name = DabConstants.UserTable.PASSWORD_HASH, nullable = false)
+  @Column(name = DbConstants.UserTable.PASSWORD_HASH, nullable = false)
   private String passwordHash;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")

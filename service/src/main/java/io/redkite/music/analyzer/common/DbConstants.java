@@ -3,7 +3,7 @@ package io.redkite.music.analyzer.common;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class DabConstants {
+public class DbConstants {
 
   @UtilityClass
   public static class UserTable {

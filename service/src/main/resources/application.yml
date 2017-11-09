@@ -21,3 +21,9 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+
+security.jwt:
+  expTime: 60 # measure in minutes
+  refreshExpTime: 180
+  tokenIssuer: plantcare.io
+  tokenSigningKey: n5Ewr42JCF6m1qcHF8hk
