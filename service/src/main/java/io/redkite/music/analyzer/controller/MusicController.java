@@ -1,5 +1,6 @@
 package io.redkite.music.analyzer.controller;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,12 +14,11 @@ import java.util.UUID;
 
 @RestController
 public class MusicController {
-  @RequestMapping(value = "/music/upload", method = RequestMethod.POST)
-  public ResponseEntity<String> uploadMusic(@RequestParam("music") MultipartFile file) throws IOException {
+
+  @RequestMapping(value = "/user/music", method = RequestMethod.POST)
+  public ResponseEntity<String> saveMusic(@RequestParam("music") MultipartFile file) throws IOException {
     File music = new File("temp/music-" + UUID.randomUUID() + ".wav");
     FileUtils.writeByteArrayToFile(music, file.getBytes());
-    this.file = music;
-    this.file = music;
     return ResponseEntity.ok("Audio file was uploaded");
   }
 }

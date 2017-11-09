@@ -22,3 +22,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+/analytics-service/analytic_service
+/analytics-service/store

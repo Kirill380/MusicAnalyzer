@@ -11,7 +11,7 @@ spring:
     serialization:
       write-dates-as-timestamps: false
   datasource:
-    url: ${mysql.url:jdbc:mysql://localhost/plant_care}
+    url: ${mysql.url:jdbc:mysql://localhost/music_analyzer}
     username: root
     password: ${mysql.root-pwd:send08}
     driver-class-name: com.mysql.jdbc.Driver
