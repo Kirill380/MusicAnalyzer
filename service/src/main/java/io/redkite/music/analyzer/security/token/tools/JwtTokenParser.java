@@ -1,7 +1,6 @@
 package io.redkite.music.analyzer.security.token.tools;
 
-import com.redkite.plantcare.configurations.JwtSettings;
-import com.redkite.plantcare.exceptions.JwtExpiredTokenException;
+
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -10,6 +9,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import io.redkite.music.analyzer.JwtExpiredTokenException;
+import io.redkite.music.analyzer.configurations.JwtSettings;
 
 import lombok.extern.slf4j.Slf4j;
 

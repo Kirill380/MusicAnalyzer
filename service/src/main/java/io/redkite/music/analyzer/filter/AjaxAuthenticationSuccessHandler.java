@@ -1,9 +1,11 @@
 package io.redkite.music.analyzer.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.redkite.plantcare.security.UserContext;
-import com.redkite.plantcare.security.token.tools.AccessJwtToken;
-import com.redkite.plantcare.security.token.tools.JwtTokenFactory;
+
+
+import io.redkite.music.analyzer.security.UserContext;
+import io.redkite.music.analyzer.security.token.tools.AccessJwtToken;
+import io.redkite.music.analyzer.security.token.tools.JwtTokenFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

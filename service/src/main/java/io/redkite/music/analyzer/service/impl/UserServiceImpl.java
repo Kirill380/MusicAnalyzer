@@ -6,14 +6,19 @@ import com.redkite.plantcare.common.dto.UserRequest;
 import com.redkite.plantcare.common.dto.UserResponse;
 
 
+import io.redkite.music.analyzer.MusicAnalyzerException;
+import io.redkite.music.analyzer.controller.filters.UserFilter;
 import io.redkite.music.analyzer.convertors.UserConverter;
 import io.redkite.music.analyzer.model.Role;
+import io.redkite.music.analyzer.model.User;
 import io.redkite.music.analyzer.repository.RoleRepository;
+import io.redkite.music.analyzer.repository.UserRepository;
 import io.redkite.music.analyzer.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
 
   @Autowired
-  private UserDao userDao;
+  private UserRepository userRepository;
 
   @Autowired
   private RoleRepository roleDao;
@@ -51,8 +56,6 @@ public class UserServiceImpl implements UserService {
   @Autowired
   private UserConverter userConverter;
 
-  @Autowired
-  private DataCollectionService dataCollectionService;
 
   @Autowired
   @Qualifier("transactionManager")
@@ -107,48 +110,47 @@ public class UserServiceImpl implements UserService {
   }
 
   private User createUser(UserRequest userRequest, String roleName) {
-    if (userDao.existsByEmail(userRequest.getEmail())) {
-      throw new PlantCareException("User with email [" + userRequest.getEmail() + "] already exists", HttpStatus.CONFLICT);
+    if (userRepository.existsByEmail(userRequest.getEmail())) {
+      throw new MusicAnalyzerException("User with email [" + userRequest.getEmail() + "] already exists", HttpStatus.CONFLICT);
     }
     User user = userConverter.toModel(userRequest);
     user.setCreationDate(LocalDateTime.now());
     user.setRole(roleDao.findByName(roleName));
-    return userDao.save(user);
+    return userRepository.save(user);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public ItemList<UserResponse> findUsers(UserFilter filter) {
-    Page<User> users = userDao.findUserByFilter(filter.getEmail(), filter);
-    List<UserResponse> userResponses = userConverter.toDtoList(users.getContent());
-    return new ItemList<>(userResponses, users.getTotalElements());
+  public Page<UserResponse> findUsers(UserFilter filter) {
+    Page<User> users = userRepository.findUserByFilter(filter.getEmail(), filter);
+    return users.map(user -> userConverter.toDto(user));
   }
 
   @Override
   public UserResponse getUserByEmail(String email) {
     checkExistence(email);
-    return userConverter.toDto(userDao.findByEmail(email));
+    return userConverter.toDto(userRepository.findByEmail(email));
   }
 
   @Override
   @Transactional(readOnly = true)
   public UserResponse getUser(Long userId) {
     checkExistence(userId);
-    return userConverter.toDto(userDao.getOne(userId));
+    return userConverter.toDto(userRepository.getOne(userId));
   }
 
   @Override
   @Transactional(readOnly = true)
   public User getFullUser(Long userId) {
     checkExistence(userId);
-    return userDao.getOne(userId);
+    return userRepository.getOne(userId);
   }
 
   @Override
   @Transactional(isolation = Isolation.REPEATABLE_READ)
   public void editUser(Long userId, UserRequest userRequest) {
     checkExistence(userId);
-    User user = userDao.getOne(userId);
+    User user = userRepository.getOne(userId);
     user.merge(userRequest);
   }
 
@@ -156,40 +158,37 @@ public class UserServiceImpl implements UserService {
   @Transactional(isolation = Isolation.REPEATABLE_READ)
   public void deleteUser(Long userId) {
     checkExistence(userId);
-    User user = userDao.getOne(userId);
-    Set<Plant> plants = user.getPlants();
-    for (Plant plant : plants) {
-      dataCollectionService.deleteDataByPlantId(plant.getId());
-    }
-    userDao.delete(userId);
+    User user = userRepository.getOne(userId);
+    //TODO add removing of music profiles
+    userRepository.delete(userId);
   }
 
   @Override
   @Transactional(isolation = Isolation.REPEATABLE_READ)
   public void changePassword(Long userId, PasswordUpdateDto passwordUpdateDto) {
     checkExistence(userId);
-    User user = userDao.getOne(userId);
+    User user = userRepository.getOne(userId);
     if (!passwordEncoder.matches(passwordUpdateDto.getOldPassword(), user.getPasswordHash())) {
-      throw new PlantCareException("Password mismatch", HttpStatus.FORBIDDEN);
+      throw new MusicAnalyzerException("Password mismatch", HttpStatus.FORBIDDEN);
     }
     user.setPasswordHash(passwordEncoder.encode(passwordUpdateDto.getNewPassword()));
   }
 
   @Override
   public boolean checkPasswordMatching(String email, String password) {
-    User user = userDao.findByEmail(email);
+    User user = userRepository.findByEmail(email);
     return passwordEncoder.matches(password, user.getPasswordHash());
   }
 
   private void checkExistence(Long userId) {
-    if (!userDao.exists(userId)) {
-      throw new PlantCareException("User with id [" + userId + "] does not exist", HttpStatus.NOT_FOUND);
+    if (!userRepository.exists(userId)) {
+      throw new MusicAnalyzerException("User with id [" + userId + "] does not exist", HttpStatus.NOT_FOUND);
     }
   }
 
   private void checkExistence(String email) {
-    if (!userDao.existsByEmail(email)) {
-      throw new PlantCareException("User with email [" + email + "] does not exist", HttpStatus.NOT_FOUND);
+    if (!userRepository.existsByEmail(email)) {
+      throw new MusicAnalyzerException("User with email [" + email + "] does not exist", HttpStatus.NOT_FOUND);
     }
   }
 

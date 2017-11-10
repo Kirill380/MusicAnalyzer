@@ -1,11 +1,11 @@
 package io.redkite.music.analyzer.security;
 
-import com.redkite.plantcare.exceptions.JwtExpiredTokenException;
-import com.redkite.plantcare.security.token.tools.JwtTokenParser;
-import com.redkite.plantcare.security.token.tools.TokenVerifier;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
+import io.redkite.music.analyzer.JwtExpiredTokenException;
+import io.redkite.music.analyzer.security.token.tools.JwtTokenParser;
+import io.redkite.music.analyzer.security.token.tools.TokenVerifier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;

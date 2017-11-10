@@ -5,15 +5,17 @@ import com.redkite.plantcare.common.dto.PasswordUpdateDto;
 import com.redkite.plantcare.common.dto.UserRequest;
 import com.redkite.plantcare.common.dto.UserResponse;
 
+import io.redkite.music.analyzer.controller.filters.UserFilter;
 import io.redkite.music.analyzer.model.User;
 
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 public interface UserService {
 
   UserResponse createUser(UserRequest userRequest);
 
-  ItemList<UserResponse> findUsers(UserFilter filter);
+  Page<UserResponse> findUsers(UserFilter filter);
 
   UserResponse getUserByEmail(String email);
 

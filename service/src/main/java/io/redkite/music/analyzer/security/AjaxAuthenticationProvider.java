@@ -1,8 +1,11 @@
 package io.redkite.music.analyzer.security;
 
-import com.redkite.plantcare.PlantCareException;
+
 import com.redkite.plantcare.common.dto.UserResponse;
-import com.redkite.plantcare.service.UserService;
+
+
+import io.redkite.music.analyzer.MusicAnalyzerException;
+import io.redkite.music.analyzer.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -40,7 +43,7 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
     UserResponse user;
     try {
       user = userService.getUserByEmail(userEmail);
-    } catch (PlantCareException ex) {
+    } catch (MusicAnalyzerException ex) {
       throw new UsernameNotFoundException(ex.getMessage());
     }
 

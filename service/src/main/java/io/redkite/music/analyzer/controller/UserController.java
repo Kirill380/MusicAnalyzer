@@ -1,19 +1,23 @@
 package io.redkite.music.analyzer.controller;
 
-import com.redkite.plantcare.PlantCareException;
+
+import static io.redkite.music.analyzer.common.Constants.Web.API_V1;
+
 import com.redkite.plantcare.common.dto.ErrorDto;
 import com.redkite.plantcare.common.dto.FieldErrorDto;
-import com.redkite.plantcare.common.dto.ItemList;
 import com.redkite.plantcare.common.dto.PasswordUpdateDto;
 import com.redkite.plantcare.common.dto.UserRequest;
 import com.redkite.plantcare.common.dto.UserResponse;
-import com.redkite.plantcare.controllers.filters.UserFilter;
-import com.redkite.plantcare.security.UserContext;
-import com.redkite.plantcare.service.TokenInvalidationService;
-import com.redkite.plantcare.service.UserService;
+
+
+import io.redkite.music.analyzer.MusicAnalyzerException;
+import io.redkite.music.analyzer.controller.filters.UserFilter;
+import io.redkite.music.analyzer.security.UserContext;
+import io.redkite.music.analyzer.service.UserService;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
@@ -31,18 +35,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping(API_V1 + "/users")
 public class UserController {
 
   @Autowired
   private UserService userService;
 
-  @Autowired
-  private TokenInvalidationService tokenInvalidationService;
+//  @Autowired
+//  private TokenInvalidationService tokenInvalidationService;
 
-
-  @Autowired
-  private Validator validator;
 
   /**
    * Creates new user based on user request.
@@ -54,7 +55,7 @@ public class UserController {
   public UserResponse createUser(@Validated @RequestBody UserRequest userRequest,
                                  BindingResult result) {
     if (result.hasErrors()) {
-      throw new PlantCareException(getErrors("Validation failed during user creation", result), HttpStatus.BAD_REQUEST);
+      throw new MusicAnalyzerException(getErrors("Validation failed during user creation", result), HttpStatus.BAD_REQUEST);
     }
     return userService.createUser(userRequest);
   }
@@ -67,7 +68,7 @@ public class UserController {
   }
 
   @RequestMapping(method = RequestMethod.GET)
-  public ItemList<UserResponse> getUsers(@ModelAttribute UserFilter filter) {
+  public Page<UserResponse> getUsers(@ModelAttribute UserFilter filter) {
     return userService.findUsers(filter);
   }
 
@@ -82,11 +83,11 @@ public class UserController {
                        BindingResult result) {
 
     if (result.hasErrors()) {
-      throw new PlantCareException(getErrors("Validation failed during user creation", result), HttpStatus.BAD_REQUEST);
+      throw new MusicAnalyzerException(getErrors("Validation failed during user creation", result), HttpStatus.BAD_REQUEST);
     }
 
     if (!checkUpdateRequest(userRequest)) {
-      throw new PlantCareException("Validation failed during updating user - empty update request", HttpStatus.BAD_REQUEST);
+      throw new MusicAnalyzerException("Validation failed during updating user - empty update request", HttpStatus.BAD_REQUEST);
     }
     userService.editUser(userId, userRequest);
   }
@@ -96,11 +97,11 @@ public class UserController {
                              @RequestBody @Validated PasswordUpdateDto updateDto,
                              BindingResult result) {
     if (result.hasErrors()) {
-      throw new PlantCareException(getErrors("Validation failed during user creation", result), HttpStatus.BAD_REQUEST);
+      throw new MusicAnalyzerException(getErrors("Validation failed during user creation", result), HttpStatus.BAD_REQUEST);
     }
     userService.changePassword(userId, updateDto);
-    UserContext currentUser = (UserContext) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    tokenInvalidationService.invalidateAllTokensForUser(currentUser.getUserId());
+//    UserContext currentUser = (UserContext) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    tokenInvalidationService.invalidateAllTokensForUser(currentUser.getUserId());
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)

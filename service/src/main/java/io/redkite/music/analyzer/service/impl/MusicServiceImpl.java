@@ -31,8 +31,8 @@ public class MusicServiceImpl implements MusicService{
 
   @Override
   public MusicProfileResponse saveMusic(byte[] payload) {
-    File music = new File("temp/music-" + UUID.randomUUID() + ".wav");
-    FileUtils.writeByteArrayToFile(music, file.getBytes());
+//    File music = new File("temp/music-" + UUID.randomUUID() + ".wav");
+//    FileUtils.writeByteArrayToFile(music, music.getBytes());
     return null;
   }
 }
