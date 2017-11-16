@@ -1,9 +1,11 @@
+<#import "/spring.ftl" as spring />
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sign in</title>
-    <link rel="stylesheet" href="/project/css/sign-in.css">
+    <link rel="stylesheet" href="/project/styles/sign-in.css">
     <link rel="stylesheet" href="/vendor/bootstrap-3.3.7/css/bootstrap.css">
     <link rel="stylesheet" href="/vendor/bootstrap-3.3.7/css/bootstrap-theme.css">
 </head>
@@ -16,7 +18,7 @@
                     <strong> Sign in </strong>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="/login" method="POST">
+                    <form role="form" action="/auth/login" method="POST">
                         <div class="row">
                             <div class="col-sm-12 col-md-10  col-md-offset-1 ">
                                 <div class="form-group">
@@ -24,7 +26,7 @@
 												<span class="input-group-addon">
 													<i class="glyphicon glyphicon-user"></i>
 												</span>
-                                        <input class="form-control" placeholder="E-mail" name="username" type="text"
+                                        <input class="form-control" placeholder="E-mail" name="email" type="text"
                                                autofocus>
                                     </div>
                                 </div>
@@ -38,7 +40,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign in">
+                                    <input type="button" class="btn btn-lg btn-success btn-block jsLogin" value="Sign in">
                                 </div>
                             </div>
                         </div>
@@ -53,5 +55,7 @@
         </div>
     </div>
 </div>
+<script src="<@spring.url '/vendor/jquery-3.1.1.min.js'/>"></script>
+<script src="<@spring.url '/project/js/Login.js' />"></script>
 </body>
 </html>
