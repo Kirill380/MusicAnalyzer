@@ -13,5 +13,5 @@ services:
     ports:
       - "8083:8083"
 networks:
-  plantnet:
+  music:
     driver: bridge

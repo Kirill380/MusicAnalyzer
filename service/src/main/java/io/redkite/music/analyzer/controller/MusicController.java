@@ -14,8 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
-@RequestMapping(path = API_V1)
+@RequestMapping(API_V1)
 public class MusicController {
 
   private final MusicService musicService;
@@ -25,9 +27,9 @@ public class MusicController {
     this.musicService = musicService;
   }
 
-  @RequestMapping(path = "/user/music", method = RequestMethod.POST)
-  public ResponseEntity<String> saveMusic(@RequestParam("music") MultipartFile file) throws IOException {
-
+  @RequestMapping(value = "/user/musics", method = RequestMethod.POST)
+  public ResponseEntity<String> saveMusic(@RequestParam("music") MultipartFile file, HttpServletRequest request) throws IOException {
+    musicService.saveMusic(file);
     return ResponseEntity.ok("Audio file was uploaded");
   }
 }

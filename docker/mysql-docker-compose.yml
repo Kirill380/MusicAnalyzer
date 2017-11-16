@@ -11,5 +11,5 @@ services:
     ports:
       - "3306:3306"
 networks:
-  plantnet:
+  music:
     driver: bridge

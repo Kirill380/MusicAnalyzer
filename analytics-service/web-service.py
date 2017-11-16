@@ -12,7 +12,8 @@ def index():
     return ('<form action="/api/upload_music" method="POST" enctype = "multipart/form-data" >'
               '<input type="file" name="music">'
               '<input type="submit">'
-            '</form>')
+            '</for'
+            'm>')
 
 
 @app.route("/api/upload_music",  methods=['GET', 'POST'])

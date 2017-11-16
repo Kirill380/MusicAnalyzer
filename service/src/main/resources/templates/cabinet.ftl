@@ -1,3 +1,5 @@
+<#import "/spring.ftl" as spring />
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -47,7 +49,7 @@
         </ul>
     </nav>
     <div class="jsPopUpMusic" style="display:none">
-        <form action="/api/v1/user/musics" method="post">
+        <form action="/api/v1/user/musics" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="music">Music file: </label>
                 <input type="file" class="form-control" name="music" id="music">
@@ -61,6 +63,6 @@
 <script src="<@spring.url '/vendor/jquery-3.1.1.min.js'/>"></script>
 <script src="<@spring.url '/vendor/bootstrap-3.3.7/js/bootstrap.js'/>"></script>
 <script src="<@spring.url '/vendor/jquery.bpopup.min.js'/>"></script>
-<script src="<@spring.url '/project/Cabinet.js' />"></script>
+<script src="<@spring.url '/project/js/Cabinet.js' />"></script>
 </body>
 </html>
