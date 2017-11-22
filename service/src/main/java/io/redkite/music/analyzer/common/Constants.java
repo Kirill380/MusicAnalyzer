@@ -7,6 +7,13 @@ public class Constants {
 
   public static final String MUSIC_FILES_STORE = "/var/lib/music-analyzer/music/store";
 
+  public static final String FILE_NAME = "musicFile";
+
+  public static final String ART_IMAGE = "artImage";
+
+  public static final String TS_IMAGE = "tsImage";
+
+
   public static class Web {
 
     public static final String API = "/api";

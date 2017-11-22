@@ -28,6 +28,7 @@
         <spring.boot.version>1.5.7.RELEASE</spring.boot.version>
         <jjwt.version>0.7.0</jjwt.version>
         <com.google.guava.version>19.0</com.google.guava.version>
+        <map-struct.version>1.2.0.Final</map-struct.version>
     </properties>
 
 
@@ -84,6 +85,16 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${com.google.guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-jdk8</artifactId>
+                <version>${map-struct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${map-struct.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

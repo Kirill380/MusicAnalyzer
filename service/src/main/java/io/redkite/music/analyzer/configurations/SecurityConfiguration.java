@@ -126,10 +126,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-            .formLogin()
-            .loginPage("/login")
-            .defaultSuccessUrl("/home")
-            .and()
             .authorizeRequests()
             .antMatchers(HttpMethod.OPTIONS, TOKEN_BASED_AUTH_ENTRY_POINT).permitAll()
             .antMatchers(LOGIN_ENTRY_POINT).permitAll() // Login end-point

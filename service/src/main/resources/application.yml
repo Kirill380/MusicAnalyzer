@@ -27,3 +27,8 @@ security.jwt:
   refreshExpTime: 180
   tokenIssuer: plantcare.io
   tokenSigningKey: n5Ewr42JCF6m1qcHF8hk
+
+
+analyzer-service:
+  base-url: http://localhost:8084/api/v1/analyzer
+  get-music-features: /musics/{id}/features

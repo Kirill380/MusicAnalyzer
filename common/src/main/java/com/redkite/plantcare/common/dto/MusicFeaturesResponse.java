@@ -2,12 +2,8 @@ package com.redkite.plantcare.common.dto;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
-public class MusicProfileResponse {
-  
-  private Long id;
+public class MusicFeaturesResponse {
 
   private String title;
 
@@ -15,19 +11,17 @@ public class MusicProfileResponse {
 
   private String album;
 
-  private Integer duration; //in seconds
-
-  private Integer tempo;
-
-  private Integer sampleRate;
-
   private String genre;
 
   private String predictedGenres;
 
   private String yearRecorded;
 
+  private Integer tempo;
+
   private Integer channels;
 
-  private LocalDateTime creationDate;
+  private Integer duration;
+
+  private Integer sampleRate;
 }

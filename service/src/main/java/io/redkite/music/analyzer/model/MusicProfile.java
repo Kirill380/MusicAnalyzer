@@ -34,8 +34,8 @@ public class MusicProfile {
   @Column
   private String author;
 
-  @Column(name = "artwork_image", length = 16777215)
-  private byte[] image;
+  @Column
+  private String album;
 
   @Column
   private Integer duration; //in seconds
@@ -49,17 +49,14 @@ public class MusicProfile {
   @Column
   private String genre;
 
+  @Column(length = 2 << 10)
+  private String predictedGenres;
+
   @Column
   private String yearRecorded;
 
   @Column
-  private String spectrumImageLocation;
-
-  @Column
   private Integer channels;
-
-  @Column(name = "timeseries_image", length = 16777215)
-  private byte[] timeseriesImage;
 
   @Column(name = "creation_date")
   private LocalDateTime creationDate;

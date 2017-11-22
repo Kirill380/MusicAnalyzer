@@ -2,6 +2,9 @@ package io.redkite.music.analyzer.controller;
 
 import static io.redkite.music.analyzer.common.Constants.Web.API_V1;
 
+import com.redkite.plantcare.common.dto.MusicProfileResponse;
+
+import io.redkite.music.analyzer.model.MusicProfile;
 import io.redkite.music.analyzer.service.MusicService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,5 +36,10 @@ public class MusicController {
   public ResponseEntity<String> saveMusic(@RequestParam("music") MultipartFile file, HttpServletRequest request) throws IOException {
     musicService.saveMusic(file);
     return ResponseEntity.ok("Audio file was uploaded");
+  }
+
+  @RequestMapping(value = "/user/musics", method = RequestMethod.GET)
+  public List<MusicProfileResponse> getMusicProfiles() {
+    return new ArrayList<>();
   }
 }
