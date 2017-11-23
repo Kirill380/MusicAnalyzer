@@ -49,8 +49,8 @@ public class MusicProfile {
   @Column
   private String genre;
 
-  @Column(length = 2 << 10)
-  private String predictedGenres;
+  @Column(length = 2 << 15)
+  private byte[] predictedGenres;
 
   @Column
   private String yearRecorded;

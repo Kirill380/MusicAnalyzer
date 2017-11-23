@@ -20,4 +20,10 @@ public class PagesController {
   public String signIn() {
     return "sign_in";
   }
+
+
+  @RequestMapping(value = "/registration", method = RequestMethod.GET)
+  public String registration() {
+    return "registration_page";
+  }
 }

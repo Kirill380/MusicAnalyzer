@@ -47,7 +47,9 @@
 <script src="<@spring.url '/vendor/jquery.bpopup.min.js'/>"></script>
 <script src="<@spring.url '/vendor/loading-indicator/jquery.loading-indicator.js'/>"></script>
 <script src="<@spring.url '/vendor/jquery.twbsPagination.js'/>"></script>
+<script src="<@spring.url '/vendor/jquery.bootstrap-growl.js'/>"></script>
 <script src="<@spring.url '/project/js/MusicCard.js' />"></script>
+<script src="<@spring.url '/project/js/NotifyUtil.js' />"></script>
 <script src="<@spring.url '/project/js/Cabinet.js' />"></script>
 </body>
 </html>

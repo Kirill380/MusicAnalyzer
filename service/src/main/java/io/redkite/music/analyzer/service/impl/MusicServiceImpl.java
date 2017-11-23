@@ -25,6 +25,7 @@ import io.redkite.music.analyzer.security.UserContext;
 import io.redkite.music.analyzer.service.MusicService;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -48,6 +49,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+@Slf4j
 @Service
 public class MusicServiceImpl implements MusicService {
 
@@ -127,14 +129,14 @@ public class MusicServiceImpl implements MusicService {
 
     final MusicFeaturesResponse features = analyticsRestClient.calculateMusicFeatures(savedMusic.getId().toString());
 
-    String title = StringUtils.isNotBlank(features.getTitle())  ? features.getTitle() : getMusicName(file.getOriginalFilename());
+    String title = StringUtils.isNotBlank(features.getTitle()) ? features.getTitle() : getMusicName(file.getOriginalFilename());
 
     savedMusic.setTitle(title);
     savedMusic.setAuthor(features.getAuthor());
     savedMusic.setAlbum(features.getAlbum());
     savedMusic.setYearRecorded(features.getYearRecorded());
     savedMusic.setGenre(features.getGenre());
-    savedMusic.setPredictedGenres(features.getPredictedGenres());
+    savedMusic.setPredictedGenres(features.getPredictedGenres().getBytes());
     savedMusic.setTempo(features.getTempo());
     savedMusic.setChannels(features.getChannels());
     savedMusic.setDuration(features.getDuration());
@@ -142,6 +144,28 @@ public class MusicServiceImpl implements MusicService {
 
     return musicConverter.toMusicResponse(savedMusic);
   }
+
+  @Override
+  @SneakyThrows(IOException.class)
+  public void deleteMusic(Long musicId) {
+    log.debug("Deleting music with id {}", musicId);
+    UserContext currentUser = (UserContext) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    final Long userId = currentUser.getUserId();
+    final User owner = userRepository.getOne(userId);
+
+    MusicProfile musicProfile = musicRepository.getMusicProfileByUser(musicId, userId)
+            .orElseThrow(() -> new MusicAnalyzerException("User with id [" + userId + "] does not have music with id [" + musicId + "]", HttpStatus.NOT_FOUND));
+
+    final File dir = new File(MUSIC_FILES_STORE + "/" + musicId);
+    if (dir.exists()) {
+      FileUtils.deleteDirectory(dir);
+    }
+
+    musicProfile.setOwner(null);
+    owner.getMusicProfiles().remove(musicProfile);
+    musicRepository.delete(musicProfile);
+  }
+
 
   private String getMusicName(String fileName) {
     return fileName.contains(".") ? fileName.split("\\.")[0] : fileName;

@@ -28,6 +28,7 @@
         <jjwt.version>0.7.0</jjwt.version>
         <com.google.guava.version>19.0</com.google.guava.version>
         <map-struct.version>1.2.0.Final</map-struct.version>
+        <hibernate.version>5.2.5.Final</hibernate.version> <!--define explicitly because spring boot use older version-->
     </properties>
 
 
@@ -94,6 +95,16 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-processor</artifactId>
                 <version>${map-struct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

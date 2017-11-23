@@ -18,18 +18,24 @@
                 <img class="waveform" src="${musicData.waveformImage}">
             </div>
             <div class="music-card__component music-card__music-duration">
-                <div class="music-feature__value">${parseInt(musicData.duration / 60) + ':' +  musicData.duration % 60}</div>
+                <div class="music-feature__value">${durationToString(musicData.duration)}</div>
                 <div class="music-feature__title">DURATION</div>
             </div>
             <div class="music-card__component music-card__music-tempo">
                 <div class="music-feature__value">${musicData.tempo}</div>
-                <div class="music-feature__title">BMP</div>
+                <div class="music-feature__title">BPM</div>
             </div>
             <div class="music-card__delete-button">
-                <span class="delete-button">X</span>
+                <span class="delete-button jsDelete">X</span>
             </div>
          </div>
         </div>`;
+    }
+    
+    function durationToString(duration) {
+        let seconds = duration % 60;
+        let secondsStr = seconds < 10 ? "0" + seconds : seconds;
+        return parseInt(duration / 60) + ':' + secondsStr;
     }
 
 

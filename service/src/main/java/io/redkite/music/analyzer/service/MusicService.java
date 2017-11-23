@@ -15,4 +15,6 @@ public interface MusicService {
   ItemList<MusicProfileResponse> getAllMusicProfiles(MusicFilter musicFilter);
 
   MusicProfileResponse saveMusic(MultipartFile file);
+
+  void deleteMusic(Long musicId);
 }

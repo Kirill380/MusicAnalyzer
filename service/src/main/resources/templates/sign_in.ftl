@@ -12,7 +12,7 @@
 <body>
 <div class="container sign-in-form">
     <div class="row">
-        <div class="col-sm-7 col-md-5 col-md-offset-3">
+        <div class="col-sm-7 col-md-4 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong> Sign in </strong>
@@ -49,13 +49,16 @@
                     </form>
                 </div>
                 <div class="panel-footer ">
-                    <#--Don't have an account! <a href="#" onClick=""> Sign Up Here </a>-->
+                    Don't have an account! <a href="/registration"> Sign Up Here </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script src="<@spring.url '/vendor/jquery-3.1.1.min.js'/>"></script>
+<script src="<@spring.url '/vendor/bootstrap-3.3.7/js/bootstrap.js'/>"></script>
+<script src="<@spring.url '/vendor/jquery.bootstrap-growl.js'/>"></script>
+<script src="<@spring.url '/project/js/NotifyUtil.js' />"></script>
 <script src="<@spring.url '/project/js/Login.js' />"></script>
 </body>
 </html>

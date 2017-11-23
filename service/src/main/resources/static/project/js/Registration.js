@@ -1,7 +1,7 @@
 $(function () {
     $(document).ready(function () {
 
-        $(".jsLogin").on("click", function (event) {
+        $(".jsRegistration").on("click", function (event) {
             var $form = $(this).closest("form");
             var $inputs = $form.find(':input:not(.btn)');
             var values = {};
@@ -16,7 +16,7 @@ $(function () {
                        success: function (data) {
                            localStorage.setItem("token", data.token);
                            setTimeout(function () {
-                               window.location.href = "/home"
+                               window.location.href = "/login"
                            }, 1000);
                        },
                        error: function (er) {
@@ -25,5 +25,7 @@ $(function () {
                        }
                    });
         });
+
+
     });
 });
