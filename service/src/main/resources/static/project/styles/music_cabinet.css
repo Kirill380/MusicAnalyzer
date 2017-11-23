@@ -43,3 +43,12 @@
     height: 0;
     clear: both;
 }
+
+.musicPopUp {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.musicPopUp form {
+    padding: 15px;
+}

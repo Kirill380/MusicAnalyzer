@@ -2,8 +2,10 @@ package io.redkite.music.analyzer.controller;
 
 import static io.redkite.music.analyzer.common.Constants.Web.API_V1;
 
+import com.redkite.plantcare.common.dto.ItemList;
 import com.redkite.plantcare.common.dto.MusicProfileResponse;
 
+import io.redkite.music.analyzer.controller.filters.MusicFilter;
 import io.redkite.music.analyzer.model.MusicProfile;
 import io.redkite.music.analyzer.service.MusicService;
 
@@ -39,7 +41,7 @@ public class MusicController {
   }
 
   @RequestMapping(value = "/user/musics", method = RequestMethod.GET)
-  public List<MusicProfileResponse> getMusicProfiles() {
-    return new ArrayList<>();
+  public ItemList<MusicProfileResponse> getMusicProfiles(MusicFilter musicFilter) {
+    return musicService.getAllMusicProfiles(musicFilter);
   }
 }

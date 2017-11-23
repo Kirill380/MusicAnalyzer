@@ -30,4 +30,8 @@ public class MusicProfileResponse {
   private Integer channels;
 
   private LocalDateTime creationDate;
+
+  private String image;
+
+  private String waveformImage;
 }

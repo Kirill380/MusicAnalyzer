@@ -13,6 +13,14 @@ public class Constants {
 
   public static final String TS_IMAGE = "tsImage";
 
+  public static final Integer ITEMS_PER_PAGE = 3;
+
+  public static  final String IMAGE_PREFIX = "data:image/jpg;base64,";
+
+  public static  final String IMAGE_SUFFIX = ".jpg";
+
+  public static  final String DEFAULT_IMAGE = "default_note.jpg";
+
 
   public static class Web {
 

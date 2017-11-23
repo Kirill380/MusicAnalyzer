@@ -13,5 +13,5 @@ public interface MusicRepository  extends JpaRepository<MusicProfile, Long> {
 
   @Query(value = "SELECT m FROM MusicProfile m JOIN m.owner o where (m.title like %:title% OR :title = NULL) and o.id = :userId",
           countQuery = "SELECT count(m) FROM MusicProfile m JOIN m.owner o where (m.title like %:title% OR :title = NULL) and o.id = :userId")
-  Page<MusicProfile> findPlantByFilter(@Param("title") String title, @Param("userId") Long userId, Pageable pageable);
+  Page<MusicProfile> findMusicProfilesByFilter(@Param("title") String title, @Param("userId") Long userId, Pageable pageable);
 }

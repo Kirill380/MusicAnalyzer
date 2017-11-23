@@ -9,7 +9,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>service</module>
-        <module>web</module>
         <module>common</module>
     </modules>
     <packaging>pom</packaging>
