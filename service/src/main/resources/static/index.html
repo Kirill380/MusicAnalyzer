@@ -8,9 +8,7 @@
     <title>Music cabinet</title>
     <link rel="stylesheet" href="vendor/bootstrap-3.3.7/css/bootstrap.css">
     <link rel="stylesheet" href="vendor/bootstrap-3.3.7/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="project/styles/music_list.css">
-    <link rel="stylesheet" href="project/styles/music_card.css">
-    <link rel="stylesheet" href="project/styles/music_cabinet.css">
+    <link rel="stylesheet" href="project/styles/music_page.css">
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -26,109 +24,116 @@
         </div>
     </div>
 </nav>
-<div class="banner">
-    <div>MUSIC<span class="glyphicon glyphicon-flash"></span>RIPER</div>
+<div class="hero-image">
+    <div class="hero-image__artwork">
+        <img src="https://i1.sndcdn.com/artworks-000129540031-qq5hf8-t500x500.jpg" alt="image">
+    </div>
+    <div class="hero-image__title">
+        <div class="title__play-button jsPlay">
+            <span class="glyphicon glyphicon-play"></span>
+        </div>
+        <div class="title__author">Chicola</div>
+        <div class="title__song-name">It is start time</div>
+    </div>
+    <div class="hero-image__waveform">
+           <div id="waveform"></div>
+    </div>
 </div>
-<div class="container cabinet">
-    <div class="controls">
-        <div class="control__item">
-            <input type="text" class="form-control" placeholder="Filter music by name">
-        </div>
-        <div class="control__item">
-            <button type="button" class="btn btn-success">Add +</button>
-        </div>
+<div class="container">
+
+    <h2 class="section__header">Music Info</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Author</td>
+            <td>Chicola</td>
+        </tr>
+        <tr>
+            <td>Album</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>Year recorder</td>
+            <td>2017</td>
+        </tr>
+        <tr>
+            <td>BPM</td>
+            <td>117</td>
+        </tr>
+        <tr>
+            <td>Genre</td>
+            <td>Progressive House</td>
+        </tr>
+        <tr>
+            <td>Duration</td>
+            <td>8:32</td>
+        </tr>
+        <tr>
+            <td>Sample rate</td>
+            <td>41000</td>
+        </tr>
+        <tr>
+            <td>Channels</td>
+            <td>2</td>
+        </tr>
+        </tbody>
+    </table>
+    <h2 class="section__header">Signal waveform</h2>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <h2 class="section__header">Signal spectrogram</h2>
+    <img style="width: 100%; height: 400px;" src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Spectrogram-19thC.png" alt="">
+    <h2 class="section__header">Predicted genre</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Genre</th>
+            <th>Percentage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Electronic</td>
+            <td>44%</td>
+        </tr>
+        <tr>
+            <td>House</td>
+            <td>20%</td>
+        </tr>
+        <tr>
+            <td>Hip-Hop</td>
+            <td>10.5%</td>
+        </tr>
+        <tr>
+            <td>Rock</td>
+            <td>9.5%</td>
+        </tr>
+        <tr>
+            <td>Jazz</td>
+            <td>7%</td>
+        </tr>
+        <tr>
+            <td>Other</td>
+            <td>9%</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="control__item">
+        <button type="button" class="btn btn-danger jsDelete">Delete</button>
+        <button type="button" class="btn btn-success jsDowload">Download</button>
     </div>
-    <div class="music-list">
-        <div class="music-list__item">
-            <div id="123" class="music-card">
-                <div class="music-card__component music-card__image">
-                    <img class="image"
-
-                         alt="Red dot">
-                </div>
-                <div class="music-card__component music-card__music-info">
-                    <div class="music-info__author">Kiesza</div>
-                    <div class="music-info__title" data-toggle="tooltip" data-placement="top"
-                         title="Kuaga (Lost Time) (Radio Edit)">Kuaga (Lost Time) (Radio Edit)
-                    </div>
-                </div>
-                <div class="music-card__component music-card__waveform">
-                    <img class="waveform"
-
-                         alt="Red dot">
-                </div>
-                <div class="music-card__component music-card__music-duration">
-                    <div class="music-feature__value">04:12</div>
-                    <div class="music-feature__title">DURATION</div>
-                </div>
-                <div class="music-card__component music-card__music-tempo">
-                    <div class="music-feature__value">120</div>
-                    <div class="music-feature__title">BMP</div>
-                </div>
-                <div class="music-card__delete-button">
-                    <span class="delete-button">X</span>
-                </div>
-            </div>
-        </div>
-        <div class="music-list__item">
-            <div id="32" class="music-card">
-                <div class="music-card__component music-card__image">
-                    <img class="image"
-
-                         alt="Red dot">
-                </div>
-                <div class="music-card__component music-card__music-info">
-                    <div class="music-info__author">VAG x STEK</div>
-                    <div class="music-info__title" data-toggle="tooltip" data-placement="top"
-                         title="It's Start Time">It's Start Time
-                    </div>
-                </div>
-                <div class="music-card__component music-card__waveform">
-                    <img class="waveform"
-
-                         alt="Red dot">
-                </div>
-                <div class="music-card__component music-card__music-duration">
-                    <div class="music-feature__value">01:32</div>
-                    <div class="music-feature__title">DURATION</div>
-                </div>
-                <div class="music-card__component music-card__music-tempo">
-                    <div class="music-feature__value">90</div>
-                    <div class="music-feature__title">BMP</div>
-                </div>
-                <div class="music-card__delete-button">
-                    <span class="delete-button">X</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 
 <script src="vendor/jquery-3.1.1.min.js"></script>
 <script src="vendor/bootstrap-3.3.7/js/bootstrap.js"></script>
-<script language="JavaScript">
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-</script>
+<script src="vendor/highcharts/highcharts.js"></script>
+<script src="vendor/highcharts/modules/exporting.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/wavesurfer.min.js"></script>
+<script src="project/js/MusicPage.js"></script>
 </body>
 </html>

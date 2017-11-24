@@ -35,9 +35,10 @@ def genrePrediction(filePath):
             'Progressive rock', '60s', 'rnb', 'indie pop',
             'sad', 'House', 'happy']
 
-    genres = ['rock', 'pop', 'alternative', 'indie', 'electronic', 'dance', 'alternative rock', 'jazz',
+    genres = ['rock', 'pop', 'alternative', 'indie', 'electronic', 'dance', 'alternative rock', 'jazz', 'metal',
      'classic rock', 'soul', 'indie rock', 'electronica', 'folk', 'punk', 'blues', 'hard rock', 'experimental', 
-       'Hip-Hop', 'heavy metal', 'country', 'funk', 'electro', 'Progressive rock', 'rnb', 'indie pop', 'House']        
+       'Hip-Hop', 'heavy metal', 'country', 'funk', 'electro', 'Progressive rock', 'rnb', 'indie pop', 'House']
+
 
     # prepare data like this
     melgrams = np.zeros((0, 1, 96, 1366))
@@ -64,6 +65,7 @@ def genrePrediction(filePath):
         print (item)
     print(' ')
 
+    print 'Total = ' + str(reduce(lambda s, el: s + float(el[1]), sorted_result, 0))
     return sorted_result
 
 if __name__ == '__main__':

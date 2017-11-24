@@ -2,6 +2,7 @@ package io.redkite.music.analyzer.service.impl;
 
 
 import static io.redkite.music.analyzer.common.Constants.ART_IMAGE;
+import static io.redkite.music.analyzer.common.Constants.FILE_NAME;
 import static io.redkite.music.analyzer.common.Constants.IMAGE_PREFIX;
 import static io.redkite.music.analyzer.common.Constants.IMAGE_SUFFIX;
 import static io.redkite.music.analyzer.common.Constants.ITEMS_PER_PAGE;
@@ -11,6 +12,7 @@ import static io.redkite.music.analyzer.common.Constants.TS_IMAGE;
 import com.redkite.plantcare.common.dto.ItemList;
 import com.redkite.plantcare.common.dto.MusicFeaturesResponse;
 import com.redkite.plantcare.common.dto.MusicProfileResponse;
+import com.redkite.plantcare.common.dto.SignalTimeSeries;
 
 import io.redkite.music.analyzer.MusicAnalyzerException;
 import io.redkite.music.analyzer.client.AnalyticsRestClient;
@@ -164,6 +166,34 @@ public class MusicServiceImpl implements MusicService {
     musicProfile.setOwner(null);
     owner.getMusicProfiles().remove(musicProfile);
     musicRepository.delete(musicProfile);
+  }
+
+  @Override
+  public MusicProfileResponse getMusicProfile(Long musicId) {
+    log.debug("Getting metadata for music with id {}", musicId);
+    UserContext currentUser = (UserContext) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    final Long userId = currentUser.getUserId();
+    MusicProfile musicProfile = musicRepository.getMusicProfileByUser(musicId, userId)
+            .orElseThrow(() -> new MusicAnalyzerException("User with id [" + userId + "] does not have music with id [" + musicId + "]", HttpStatus.NOT_FOUND));
+    final MusicProfileResponse musicProfileResponse = musicConverter.toMusicResponse(musicProfile);
+    setImages(musicProfileResponse);
+    return musicProfileResponse;
+  }
+
+  @Override
+  @SneakyThrows(IOException.class)
+  public InputStream getAudioFile(Long musicId) {
+    log.debug("Getting audio file for music with id {}", musicId);
+//    UserContext currentUser = (UserContext) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    final Long userId = currentUser.getUserId();
+//    musicRepository.getMusicProfileByUser(musicId, userId)
+//            .orElseThrow(() -> new MusicAnalyzerException("User with id [" + userId + "] does not have music with id [" + musicId + "]", HttpStatus.NOT_FOUND));
+    return new FileInputStream(new File(MUSIC_FILES_STORE + "/" + musicId + "/" + FILE_NAME));
+  }
+
+  @Override
+  public SignalTimeSeries getTimeSeries(Long id, Double from, Double to) {
+    return null;
   }
 
 

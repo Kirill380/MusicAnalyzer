@@ -18,6 +18,9 @@
 <body>
 
 <#include "header.ftl"/>
+<div class="banner">
+    <div>MUSIC<span class="glyphicon glyphicon-flash"></span>RIPER</div>
+</div>
 <div class="container cabinet">
     <div class="controls">
         <div class="control__item">

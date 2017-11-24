@@ -90,6 +90,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             a(LOGIN_ENTRY_POINT),
             a(LOGOUT_ENTRY_POINT),
             a(USERS_ENTRY_POINT, HttpMethod.POST),
+            a("/api/v1/user/musics/*/audio-file", HttpMethod.GET),
             a("/login"));
     SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(apisToSkip, TOKEN_BASED_AUTH_ENTRY_POINT);
     JwtTokenAuthenticationProcessingFilter filter
@@ -135,6 +136,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, USERS_ENTRY_POINT).permitAll()
+            .antMatchers(HttpMethod.GET, "/api/v1/user/musics/*/audio-file").permitAll()
             .antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated() // Protected API End-points
 //            .antMatchers("/", "/home", "/profile/**", "/music_page/**").authenticated() // Protected Pages
             .and()

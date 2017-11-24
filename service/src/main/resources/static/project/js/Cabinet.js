@@ -7,6 +7,8 @@ $(function () {
         let $pagination = $("#jsPagination");
 
         let token = localStorage.getItem('token');
+        let language = localStorage.getItem('language') || "en";
+
         if (token === null || token.length === 0) {
             window.location.href = "/login";
         }
@@ -105,6 +107,7 @@ $(function () {
                                musicList.append(musicCard(items[i]));
                            }
                            addDeleteHandler();
+                           addRedirectOnMusicPage();
                            refreshPaginator(Math.ceil(audios.totalCount / ITEMS_PER_PAGE));
                        },
                        error: function (er) {
@@ -151,6 +154,13 @@ $(function () {
                            }
                        });
             });
+        }
+
+        function addRedirectOnMusicPage() {
+            $(".jsMusicPage").on("click", function () {
+                let musicId = $(this).parent().get(0).id;
+                window.location.href = "/music/" + musicId;
+            })
         }
 
         function refreshPaginator(totalPages) {

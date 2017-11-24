@@ -5,7 +5,7 @@
     function musicCard(musicData) {
         return`<div class="music-list__item">
           <div id="${musicData.id}" class="music-card">
-             <div class="music-card__component music-card__image">
+             <div class="music-card__component music-card__image jsMusicPage">
                    <img class="image" src="${musicData.image}">
              </div>
             <div class="music-card__component music-card__music-info">

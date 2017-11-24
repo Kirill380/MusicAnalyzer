@@ -1,0 +1,84 @@
+.cabinet {
+    margin-top: 50px;
+}
+
+.hero-image {
+    position: relative;
+    margin-top: 50px;
+    height: 380px;
+    background: linear-gradient(135deg, rgb(191, 189, 181) 0%, rgb(102, 103, 135) 100%);
+}
+
+.hero-image__title {
+    position: relative;
+}
+
+.title__play-button {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border-color: #f50;
+    background-color: #f50;
+    color: white;
+    font-size: 40px;
+}
+
+.title__play-button span {
+    top: 5px;
+    left: 12px;
+}
+
+.title__play-button:hover {
+    background-color: #f30;
+    border-color: #f30;
+}
+
+
+.title__author {
+    position: absolute;
+    left: 110px;
+    top: 28px;
+    color: white;
+    font-size: 20px;
+}
+
+.title__song-name {
+    position: absolute;
+    left: 110px;
+    top: 53px;
+    color: white;
+    font-size: 30px;
+}
+
+.hero-image__waveform {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 1000px;
+}
+
+.hero-image__artwork {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.hero-image__artwork img{
+    width: 340px;
+    height: 340px;
+}
+
+.section__header  {
+    border-bottom: 2px solid #555555;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
+}
+
+.control__item {
+    float: right;
+    margin: 20px 0 20px 20px;
+}
