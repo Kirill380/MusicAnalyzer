@@ -78,7 +78,22 @@
     margin-bottom: 30px;
 }
 
-.control__item {
+.controls {
     float: right;
     margin: 20px 0 20px 20px;
+}
+
+.section__controls {
+    margin-bottom: 20px;
+}
+
+.control__input {
+    display: inline-block;
+    width: 300px;
+    margin-right: 20px;
+}
+
+.control__button {
+    display: inline-block;
+    width: 100px;
 }

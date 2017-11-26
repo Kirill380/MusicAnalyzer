@@ -13,6 +13,7 @@ import io.redkite.music.analyzer.model.Role;
 import io.redkite.music.analyzer.model.User;
 import io.redkite.music.analyzer.repository.RoleRepository;
 import io.redkite.music.analyzer.repository.UserRepository;
+import io.redkite.music.analyzer.security.UserContext;
 import io.redkite.music.analyzer.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -178,6 +180,13 @@ public class UserServiceImpl implements UserService {
   public boolean checkPasswordMatching(String email, String password) {
     User user = userRepository.findByEmail(email);
     return passwordEncoder.matches(password, user.getPasswordHash());
+  }
+
+  @Override
+  public UserResponse getUserCurrent() {
+    UserContext currentUser = (UserContext) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    final Long userId = currentUser.getUserId();
+    return userConverter.toDto(userRepository.getOne(userId));
   }
 
   private void checkExistence(Long userId) {

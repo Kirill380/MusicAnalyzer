@@ -4,6 +4,7 @@ import static io.redkite.music.analyzer.common.Constants.Web.API_V1;
 
 import com.redkite.plantcare.common.dto.ItemList;
 import com.redkite.plantcare.common.dto.MusicProfileResponse;
+import com.redkite.plantcare.common.dto.SignalSpectrogram;
 import com.redkite.plantcare.common.dto.SignalTimeSeries;
 
 import io.redkite.music.analyzer.controller.filters.MusicFilter;
@@ -66,10 +67,19 @@ public class MusicController {
 
   @RequestMapping(value = "/user/musics/{id}/time-series", method = RequestMethod.GET)
   public SignalTimeSeries getTimeSeries(@PathVariable Long id,
-                                        @RequestParam Double from,
-                                        @RequestParam Double to) {
+                                        @RequestParam int from,
+                                        @RequestParam int to) {
     return musicService.getTimeSeries(id, from, to);
   }
+
+
+  @RequestMapping(value = "/user/musics/{id}/spectrogram", method = RequestMethod.GET)
+  public SignalSpectrogram getSpectrogram(@PathVariable Long id,
+                                          @RequestParam int from,
+                                          @RequestParam int to) {
+    return musicService.getSpectrogram(id, from, to);
+  }
+
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @RequestMapping(value = "/user/musics/{id}", method = RequestMethod.DELETE)

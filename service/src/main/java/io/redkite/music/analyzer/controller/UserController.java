@@ -77,6 +77,12 @@ public class UserController {
     return userService.getUser(userId);
   }
 
+  @RequestMapping(value = "/current", method = RequestMethod.GET)
+  public UserResponse getCurrentUser() {
+    return userService.getUserCurrent();
+  }
+
+
   @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
   public void editUser(@PathVariable("userId") Long userId,
                        @RequestBody @Validated({UserRequest.UserUpdate.class}) UserRequest userRequest,

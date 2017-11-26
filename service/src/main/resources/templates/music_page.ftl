@@ -33,36 +33,55 @@
     </div>
 </div>
 <div class="container">
+    <div class="section">
+        <h2 class="section__header">Music Info</h2>
+        <table class="table table-hover jsMusicInfo">
+            <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="section">
+        <h2 class="section__header">Signal waveform</h2>
+        <div class="section__controls">
+            <input type="text" name="from" class="form-control control__input" value="0" placeholder="from second">
+            <input type="text" name="to" class="form-control control__input" value="1" placeholder="to second">
+            <button type="button" class="btn btn-info control__button jsTimeSeries">Select</button>
+        </div>
+        <div id="tsChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
 
-    <h2 class="section__header">Music Info</h2>
-    <table class="table table-hover jsMusicInfo">
-        <thead>
-        <tr>
-            <th>Attribute</th>
-            <th>Value</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-    <h2 class="section__header">Signal waveform</h2>
-    <div id="tsChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    <h2 class="section__header">Signal spectrogram</h2>
-    <img style="width: 100%; height: 400px;"
-         src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Spectrogram-19thC.png" alt="">
-    <h2 class="section__header">Predicted genre</h2>
-    <table class="table table-hover jsGenreTable">
-        <thead>
-        <tr>
-            <th>Genre</th>
-            <th>Percentage</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="section">
+        <h2 class="section__header">Signal spectrogram</h2>
+        <div class="section__controls">
+            <input type="text" name="from" class="form-control control__input" value="0" placeholder="from second">
+            <input type="text" name="to" class="form-control control__input" value="10" placeholder="to second">
+            <button type="button" class="btn btn-info control__button jsSpectrogram">Select</button>
+        </div>
+        <img class="jsSpectrumChart" style="width: 100%; height: 550px;" src="" alt="spectrum">
+    </div>
 
-        </tbody>
-    </table>
-    <div class="control__item">
+    <div class="section">
+        <h2 class="section__header">Predicted genre</h2>
+        <table class="table table-hover jsGenreTable">
+            <thead>
+            <tr>
+                <th>Genre</th>
+                <th>Percentage</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="controls">
         <button type="button" class="btn btn-danger jsDelete">Delete</button>
         <button type="button" class="btn btn-success jsDownload">Download</button>
     </div>

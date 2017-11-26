@@ -144,11 +144,13 @@ $(function () {
                                loader.show();
                            },
                            success: function () {
+                               loader.hide();
                                setTimeout(function () {
                                    location.reload();
                                }, 2000)
                            },
                            error: function (er) {
+                               loader.hide();
                                errorNotification(er);
                                console.log(er);
                            }

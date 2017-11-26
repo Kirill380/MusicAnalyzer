@@ -19,15 +19,11 @@ public interface UserService {
 
   UserResponse getUserByEmail(String email);
 
-
   UserResponse getUser(Long userId);
-
 
   User getFullUser(Long userId);
 
-
   void editUser(Long userId, UserRequest userRequest);
-
 
   void deleteUser(Long userId);
 
@@ -35,4 +31,5 @@ public interface UserService {
 
   boolean checkPasswordMatching(String email, String password);
 
+  UserResponse getUserCurrent();
 }

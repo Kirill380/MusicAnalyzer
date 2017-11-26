@@ -12,6 +12,7 @@ import static io.redkite.music.analyzer.common.Constants.TS_IMAGE;
 import com.redkite.plantcare.common.dto.ItemList;
 import com.redkite.plantcare.common.dto.MusicFeaturesResponse;
 import com.redkite.plantcare.common.dto.MusicProfileResponse;
+import com.redkite.plantcare.common.dto.SignalSpectrogram;
 import com.redkite.plantcare.common.dto.SignalTimeSeries;
 
 import io.redkite.music.analyzer.MusicAnalyzerException;
@@ -192,8 +193,24 @@ public class MusicServiceImpl implements MusicService {
   }
 
   @Override
-  public SignalTimeSeries getTimeSeries(Long id, Double from, Double to) {
-    return null;
+  public SignalTimeSeries getTimeSeries(Long musicId, Integer from, Integer to) {
+    log.debug("Getting time series for music with id {}", musicId);
+    UserContext currentUser = (UserContext) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    final Long userId = currentUser.getUserId();
+    musicRepository.getMusicProfileByUser(musicId, userId)
+              .orElseThrow(() -> new MusicAnalyzerException("User with id [" + userId + "] does not have music with id [" + musicId + "]", HttpStatus.NOT_FOUND));
+    return analyticsRestClient.getTimeSeries(musicId, from, to);
+  }
+
+  @Override
+  public SignalSpectrogram getSpectrogram(Long musicId, int from, int to) {
+    log.debug("Getting spectrogram for music with id {}", musicId);
+    UserContext currentUser = (UserContext) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    final Long userId = currentUser.getUserId();
+    musicRepository.getMusicProfileByUser(musicId, userId)
+            .orElseThrow(() -> new MusicAnalyzerException("User with id [" + userId + "] does not have music with id [" + musicId + "]", HttpStatus.NOT_FOUND));
+
+    return analyticsRestClient.getSpectrogram(musicId, from, to);
   }
 
 

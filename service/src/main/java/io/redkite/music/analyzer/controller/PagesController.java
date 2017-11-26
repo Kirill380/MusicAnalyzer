@@ -2,6 +2,9 @@ package io.redkite.music.analyzer.controller;
 
 import static io.redkite.music.analyzer.common.Constants.Web.API_V1;
 
+import io.redkite.music.analyzer.security.UserContext;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,5 +36,11 @@ public class PagesController {
   public String musicPage(@PathVariable String id, Model model) {
     model.addAttribute("musicId", id);
     return "music_page";
+  }
+
+
+  @RequestMapping(value = "/user_info", method = RequestMethod.GET)
+  public String userProfile(Model model) {
+    return "profile";
   }
 }

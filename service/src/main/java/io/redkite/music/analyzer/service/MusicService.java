@@ -3,6 +3,7 @@ package io.redkite.music.analyzer.service;
 
 import com.redkite.plantcare.common.dto.ItemList;
 import com.redkite.plantcare.common.dto.MusicProfileResponse;
+import com.redkite.plantcare.common.dto.SignalSpectrogram;
 import com.redkite.plantcare.common.dto.SignalTimeSeries;
 
 import io.redkite.music.analyzer.controller.filters.MusicFilter;
@@ -23,5 +24,7 @@ public interface MusicService {
 
   InputStream getAudioFile(Long id);
 
-  SignalTimeSeries getTimeSeries(Long id, Double from, Double to);
+  SignalTimeSeries getTimeSeries(Long musicId, Integer from, Integer to);
+
+  SignalSpectrogram getSpectrogram(Long id, int from, int to);
 }
