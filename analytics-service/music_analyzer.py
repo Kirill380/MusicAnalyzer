@@ -56,16 +56,16 @@ def get_time_series(music_id, from_sec, to_sec):
     file_name = MUSIC_FILES_STORE + '/' + music_id + '/' + FILE_NAME
     ts, sr = librosa.load(file_name, sr=None, offset=from_sec, duration=to_sec - from_sec)
     return {
-        "data": [[i * DEFAULT_INTERVAL, x.item()] for i, x in enumerate(ts)]
+        "data": [[i * DEFAULT_INTERVAL + from_sec, x.item()] for i, x in enumerate(ts)]
     }
 
 
 def get_spectrum(music_id, from_sec, to_sec):
     file_name = MUSIC_FILES_STORE + '/' + music_id + '/' + FILE_NAME
     ts, sr = librosa.load(file_name, sr=None, offset=from_sec, duration=to_sec - from_sec)
-    D = librosa.stft(ts, center=False)
+    D = librosa.stft(ts, n_fft=4096)
     plt.figure(figsize=(16, 8))
-    librosa.display.specshow(librosa.amplitude_to_db(D, ref=np.max), y_axis='linear', x_axis='time')
+    librosa.display.specshow(librosa.amplitude_to_db(D, ref=np.max), y_axis='log', x_axis='time', sr=sr, hop_length=1024)
     plt.colorbar(format='%+2.0f dB')
     plt.tight_layout()
     plt.draw()

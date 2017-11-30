@@ -36,7 +36,7 @@ def genrePrediction(filePath):
             'sad', 'House', 'happy']
 
     genres = ['rock', 'pop', 'alternative', 'indie', 'electronic', 'dance', 'alternative rock', 'jazz', 'metal',
-     'classic rock', 'soul', 'indie rock', 'electronica', 'folk', 'punk', 'blues', 'hard rock', 'experimental', 
+     'classic rock', 'soul', 'indie rock', 'electronica', 'folk', 'punk', 'blues', 'hard rock', 'experimental',
        'Hip-Hop', 'heavy metal', 'country', 'funk', 'electro', 'Progressive rock', 'rnb', 'indie pop', 'House']
 
 

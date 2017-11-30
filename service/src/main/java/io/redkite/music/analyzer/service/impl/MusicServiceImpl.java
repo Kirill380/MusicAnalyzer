@@ -45,7 +45,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -198,7 +200,7 @@ public class MusicServiceImpl implements MusicService {
     UserContext currentUser = (UserContext) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     final Long userId = currentUser.getUserId();
     musicRepository.getMusicProfileByUser(musicId, userId)
-              .orElseThrow(() -> new MusicAnalyzerException("User with id [" + userId + "] does not have music with id [" + musicId + "]", HttpStatus.NOT_FOUND));
+            .orElseThrow(() -> new MusicAnalyzerException("User with id [" + userId + "] does not have music with id [" + musicId + "]", HttpStatus.NOT_FOUND));
     return analyticsRestClient.getTimeSeries(musicId, from, to);
   }
 
@@ -215,7 +217,11 @@ public class MusicServiceImpl implements MusicService {
 
 
   private String getMusicName(String fileName) {
-    return fileName.contains(".") ? fileName.split("\\.")[0] : fileName;
+    if (fileName.contains(".")) {
+      return fileName.substring(0, fileName.lastIndexOf("."));
+    }
+    return fileName;
+
   }
 
 }

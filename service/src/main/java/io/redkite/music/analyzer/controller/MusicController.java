@@ -61,6 +61,7 @@ public class MusicController {
   @RequestMapping(value = "/user/musics/{id}/audio-file", method = RequestMethod.GET)
   public void getAudioFile(@PathVariable Long id, HttpServletResponse response) throws IOException {
     final InputStream audioFile = musicService.getAudioFile(id);
+
     IOUtils.copy(audioFile, response.getOutputStream());
     response.flushBuffer();
   }

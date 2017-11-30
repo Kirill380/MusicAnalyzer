@@ -33,5 +33,6 @@ def get_music_spectrum(id):
     return Response(response=json.dumps(spectrum), status=200, mimetype="application/json")
 
 
+
 if __name__ == "__main__":
     app.run(port = 8084, debug=True)
